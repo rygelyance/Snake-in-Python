@@ -11,4 +11,4 @@ It's an 18x18 grid, the speed increases every 10 apples you collect, and the gam
 Once the game ends, you're given your score and an option to restart or quit.
 That's about it, like I said, very classic version of snake.
 
-![Demo](https://github.com/rygelyance/Snake-in-Python/blob/main/Screenshot%202024-01-13%20003312.png?raw=true)
+![Demo](https://github.com/rygelyance/Snake-in-Python/blob/main/snake_screenshot.png?raw=true)
