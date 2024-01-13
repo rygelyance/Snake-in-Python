@@ -9,3 +9,5 @@ As for the game itself, I went for as traditional as possible.
 It's an 18x18 grid, the speed increases every 10 apples you collect, and the game ends if you run into yourself or into one of the walls (None of that looping nonsense).
 Once the game ends, you're given your score and an option to restart or quit.
 That's about it, like I said, very classic version of snake.
+
+![Demo](https://github.com/rygelyance/Snake-in-Python/blob/main/Screenshot%202024-01-13%20003312.png?raw=true)
