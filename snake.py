@@ -11,6 +11,7 @@ pygame.init()
 # Initializes a square window
 window = pygame.display.set_mode((720, 720))
 pygame.display.set_caption('Snake by Rygel Yance')
+delta_time = 0
  
 # Booleans to handle the loops for both gameplay and the window itself
 running = True
@@ -47,45 +48,36 @@ def try_again_msg(msg, color):
 
 # Main window loop 
 while running:
-    # Quits the loop if the 'x' button on the window is pressed
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
     # Main gameplay loop
     while not game_over:
         for event in pygame.event.get():
+            # Quits the loop if the 'x' button on the window is pressed
+            if event.type == pygame.QUIT:
+                running = False
             if event.type == pygame.KEYDOWN:
                  # Handles the input of the game using either wasd or the arrow keys. The prev_key variable is to make sure the snake cannot reverse direction.
-                 if event.key == pygame.K_LEFT and prev_key != 2:
-                     prev_key = 1
+                 if event.key == pygame.K_LEFT and prev_key != 1:
                      x_change = -40
                      y_change = 0
                  elif event.key == pygame.K_RIGHT and prev_key != 1:
-                     prev_key = 2
                      x_change = 40
                      y_change = 0
-                 elif event.key == pygame.K_UP and prev_key != 4:
-                    prev_key = 3
+                 elif event.key == pygame.K_UP and prev_key != 2:
                     y_change = -40
                     x_change = 0
-                 elif event.key == pygame.K_DOWN and prev_key != 3:
-                    prev_key = 4
+                 elif event.key == pygame.K_DOWN and prev_key != 2:
                     y_change = 40
                     x_change = 0
-                 elif event.key == pygame.K_a and prev_key != 2:
-                     prev_key = 1
+                 elif event.key == pygame.K_a and prev_key != 1:
                      x_change = -40
                      y_change = 0
                  elif event.key == pygame.K_d and prev_key != 1:
-                     prev_key = 2
                      x_change = 40
                      y_change = 0
-                 elif event.key == pygame.K_w and prev_key != 4:
-                    prev_key = 3
+                 elif event.key == pygame.K_w and prev_key != 2:
                     y_change = -40
                     x_change = 0
-                 elif event.key == pygame.K_s and prev_key != 3:
-                    prev_key = 4
+                 elif event.key == pygame.K_s and prev_key != 2:
                     y_change = 40
                     x_change = 0
  
@@ -118,15 +110,27 @@ while running:
         # Sets the background color of the window
         window.fill('black')   
         # Draws the food in the window
-        pygame.draw.rect(window, 'red', [food_x, food_y, 40, 40])
+        pygame.draw.circle(window, (222, 42, 66, 255), [food_x + 20, food_y + 20], 17)
 
         # Draws each segment of the snake then updates the window accordingly
         for coord in snake_arr:
-            pygame.draw.rect(window, 'green', [coord[0], coord[1], 40, 40])
+            pygame.draw.rect(window, (120, 180, 84, 255), [coord[0], coord[1], 40, 40], 0, 10)
+            pygame.draw.rect(window, (110, 170, 74, 255), [coord[0], coord[1], 40, 40], 3, 10)
 
         pygame.display.update()
 
-        # Sets the speed that the game runs at
+        if x_change != 0:
+            pygame.draw.circle(window, 'black', [x + 20, y + 9], 3)
+            pygame.draw.circle(window, 'black', [x + 20, y + 31], 3)
+            pygame.display.update()
+            prev_key = 1
+        elif y_change != 0:
+            pygame.draw.circle(window, 'black', [x + 9, y + 20], 3)
+            pygame.draw.circle(window, 'black', [x + 31, y + 20], 3)
+            pygame.display.update()
+            prev_key = 2
+
+        # Sets the speed that the game runs at and allows the inputs to sync to the frame rate
         clock.tick(snake_speed)
     
     # Displays the game over messages and the option to try again
@@ -156,4 +160,3 @@ while running:
                 running = False
 
 pygame.quit()
-quit()
